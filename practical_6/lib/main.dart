@@ -2,26 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State createState() => _MyAppState();
-}
-
-class _MyAppState extends State {
-  late GoogleMapController mapController;
-
-
-  final LatLng _center = const LatLng(22.29301284148933, 73.12225873737414);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,19 +13,36 @@ class _MyAppState extends State {
         useMaterial3: true,
         colorSchemeSeed: Colors.green[500],
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Navrachana University'),
-          elevation: 2,
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 8.0,
-          ),
-        ),
+      home: GoogleMapsPage(),
+    );
+  }
+}
+
+class GoogleMapsPage extends StatefulWidget {
+  @override
+  _GoogleMapsPageState createState() => _GoogleMapsPageState();
+}
+
+class _GoogleMapsPageState extends State<GoogleMapsPage> {
+  final MapController _mapController = MapController();
+    
+  final LatLng _center = const LatLng(22.29301284148933, 73.12225873737414);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Navrachana University'),
+        elevation: 2,
       ),
+    body: GoogleMap(
+      initialCameraPosition: CameraPosition(target: _center, zoom: 8.0),
+      onMapCreated: (controller) {
+        setState(() {
+        mapController = controller;
+      });
+    },
+  ),
     );
   }
 }

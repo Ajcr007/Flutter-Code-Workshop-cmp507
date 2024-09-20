@@ -34,7 +34,7 @@ class _MyAppState extends State {
       theme: ThemeData(primarySwatch: Colors.green),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Reading Data from File...'),
+          title: Text('Reading Data from File...Folder: AJIN -> HELLO WORLD'),
         ),
         body: Container(
           padding: EdgeInsets.only(top: 10.0,left: 50.0,right: 50.0, bottom: 10.0),
